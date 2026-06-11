@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BWC Portal — Staff review wireframe</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-primary: #1e1e1c;
+  --bg-secondary: #2a2a27;
+  --bg-tertiary: #242422;
+  --bg-info: #0c2840;
+  --bg-warning: #2e1e06;
+  --bg-success: #102008;
+  --bg-danger: #280c0c;
+  --text-primary: #e8e6de;
+  --text-secondary: #a09e96;
+  --text-tertiary: #6a6862;
+  --text-info: #85b7eb;
+  --text-success: #97c459;
+  --text-warning: #ef9f27;
+  --text-danger: #f09595;
+  --border-tertiary: rgba(255,255,255,0.08);
+  --border-secondary: rgba(255,255,255,0.14);
+  --border-info: #185fa5;
+  --border-warning: #854f0b;
+  --border-success: #3b6d11;
+  --border-danger: #a32d2d;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+body { font-family: var(--font); background: #141412; padding: 32px 16px; min-height: 100vh; }
+.screen { background: var(--bg-tertiary); border-radius: var(--radius-lg); border: 0.5px solid var(--border-tertiary); overflow: hidden; max-width: 1000px; margin: 0 auto; }
+.nav { background: var(--bg-primary); border-bottom: 0.5px solid var(--border-tertiary); padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-size: 15px; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+.nav-brand i { font-size: 18px; color: var(--text-secondary); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.staff-badge { background: var(--bg-secondary); border: 0.5px solid var(--border-tertiary); border-radius: 999px; padding: 3px 10px; font-size: 11px; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; }
+.user-pill { display: flex; align-items: center; gap: 8px; background: var(--bg-secondary); border: 0.5px solid var(--border-tertiary); border-radius: 999px; padding: 4px 12px 4px 4px; }
+.avatar { width: 24px; height: 24px; border-radius: 50%; background: #5865F2; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; }
+.user-pill span { font-size: 13px; color: var(--text-secondary); }
+.layout { display: grid; grid-template-columns: 260px 1fr; min-height: 640px; }
+.queue { background: var(--bg-primary); border-right: 0.5px solid var(--border-tertiary); display: flex; flex-direction: column; }
+.queue-header { padding: 16px; border-bottom: 0.5px solid var(--border-tertiary); display: flex; align-items: center; justify-content: space-between; }
+.queue-header h3 { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+.queue-count { background: var(--bg-secondary); border-radius: 999px; padding: 2px 8px; font-size: 12px; color: var(--text-secondary); }
+.queue-filters { padding: 10px 12px; border-bottom: 0.5px solid var(--border-tertiary); display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-pill { padding: 4px 10px; border-radius: 999px; font-size: 12px; cursor: pointer; border: 0.5px solid var(--border-tertiary); color: var(--text-secondary); background: transparent; font-family: var(--font); }
+.filter-pill.active { background: var(--bg-secondary); color: var(--text-primary); border-color: var(--border-secondary); }
+.app-item { padding: 12px 16px; border-bottom: 0.5px solid var(--border-tertiary); cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+.app-item:hover { background: var(--bg-secondary); }
+.app-item.active { background: var(--bg-secondary); border-left: 2px solid #378ADD; }
+.app-item-top { display: flex; align-items: center; justify-content: space-between; }
+.app-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+.app-meta { font-size: 12px; color: var(--text-tertiary); display: flex; align-items: center; gap: 6px; }
+.sl { font-size: 11px; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+.sl-pending { background: #2e1e06; color: #ef9f27; }
+.sl-s2 { background: #1a1840; color: #afa9ec; }
+.sl-recruiter { background: #0c2840; color: #85b7eb; }
+.sl-hold { background: #280c0c; color: #f09595; }
+.sl-approved { background: #102008; color: #97c459; }
+.detail { display: flex; flex-direction: column; }
+.detail-header { padding: 20px 24px 16px; border-bottom: 0.5px solid var(--border-tertiary); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.applicant-info h2 { font-size: 17px; font-weight: 500; color: var(--text-primary); margin-bottom: 6px; }
+.applicant-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.meta-tag { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); }
+.action-bar { display: flex; gap: 8px; flex-shrink: 0; }
+.btn-approve { background: var(--bg-success); border: 0.5px solid var(--border-success); border-radius: var(--radius-md); padding: 7px 14px; font-size: 13px; color: var(--text-success); cursor: pointer; display: flex; align-items: center; gap: 6px; font-family: var(--font); }
+.btn-hold { background: var(--bg-warning); border: 0.5px solid var(--border-warning); border-radius: var(--radius-md); padding: 7px 12px; font-size: 13px; color: var(--text-warning); cursor: pointer; font-family: var(--font); display: flex; align-items: center; gap: 6px; }
+.btn-reject { background: var(--bg-danger); border: 0.5px solid var(--border-danger); border-radius: var(--radius-md); padding: 7px 12px; font-size: 13px; color: var(--text-danger); cursor: pointer; font-family: var(--font); display: flex; align-items: center; gap: 6px; }
+.detail-body { display: grid; grid-template-columns: 1fr 220px; }
+.detail-main { padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; border-right: 0.5px solid var(--border-tertiary); }
+.section-label { font-size: 11px; font-weight: 500; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; display: block; }
+.qa-list { display: flex; flex-direction: column; gap: 12px; }
+.qa-item { display: flex; flex-direction: column; gap: 3px; }
+.qa-q { font-size: 12px; color: var(--text-secondary); }
+.qa-a { font-size: 13px; color: var(--text-primary); }
+.comment-thread { display: flex; flex-direction: column; gap: 10px; }
+.comment { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; background: var(--bg-secondary); border-radius: var(--radius-md); }
+.comment.internal { border-left: 2px solid #7F77DD; }
+.comment-author { font-size: 11px; color: var(--text-tertiary); display: flex; align-items: center; gap: 6px; }
+.comment-body { font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+.comment-input-area { display: flex; flex-direction: column; gap: 8px; }
+.comment-input-area textarea { width: 100%; font-size: 13px; height: 64px; resize: none; border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); padding: 8px 10px; font-family: var(--font); outline: none; background: var(--bg-primary); color: var(--text-primary); }
+.comment-actions { display: flex; justify-content: space-between; align-items: center; }
+.internal-toggle { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); cursor: pointer; }
+.internal-toggle input { width: 14px; height: 14px; accent-color: #7F77DD; }
+.btn-send { background: var(--bg-primary); border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); padding: 6px 14px; font-size: 13px; color: var(--text-primary); cursor: pointer; font-family: var(--font); }
+.detail-sidebar { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+.sidebar-card { display: flex; flex-direction: column; gap: 8px; }
+.sidebar-card-label { font-size: 11px; font-weight: 500; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; display: block; }
+.info-row { display: flex; flex-direction: column; gap: 2px; }
+.info-key { font-size: 11px; color: var(--text-tertiary); }
+.info-val { font-size: 13px; color: var(--text-primary); }
+.state-option { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: var(--radius-md); cursor: pointer; font-size: 12px; color: var(--text-secondary); }
+.state-option.current { background: var(--bg-secondary); color: var(--text-primary); font-weight: 500; }
+.state-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.history-item { padding: 8px 10px; background: var(--bg-secondary); border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 2px; }
+.history-top { display: flex; justify-content: space-between; align-items: center; }
+.hi-game { font-size: 12px; font-weight: 500; color: var(--text-primary); }
+.hi-date { font-size: 11px; color: var(--text-tertiary); }
+.sidebar-divider { height: 0.5px; background: var(--border-tertiary); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="nav">
+    <div class="nav-brand"><i class="ti ti-shield"></i>BWC Portal — Staff</div>
+    <div class="nav-right">
+      <div class="staff-badge"><i class="ti ti-star" style="font-size:12px"></i>Recruiter</div>
+      <div class="user-pill"><div class="avatar">SH</div><span>StaffHansen</span></div>
+    </div>
+  </div>
+  <div class="layout">
+    <div class="queue">
+      <div class="queue-header">
+        <h3>Applications</h3>
+        <span class="queue-count">6 pending</span>
+      </div>
+      <div class="queue-filters">
+        <button class="filter-pill active">All</button>
+        <button class="filter-pill">S-2</button>
+        <button class="filter-pill">Review</button>
+        <button class="filter-pill">On hold</button>
+      </div>
+      <div>
+        <div class="app-item active">
+          <div class="app-item-top"><span class="app-name">PatrickH</span><span class="sl sl-s2">S-2 review</span></div>
+          <div class="app-meta"><span>Star Citizen</span><span>&middot;</span><span>2h ago</span></div>
+        </div>
+        <div class="app-item">
+          <div class="app-item-top"><span class="app-name">CmdrVoss</span><span class="sl sl-recruiter">Recruiter</span></div>
+          <div class="app-meta"><span>Dune: Awakening</span><span>&middot;</span><span>5h ago</span></div>
+        </div>
+        <div class="app-item">
+          <div class="app-item-top"><span class="app-name">IronWolf92</span><span class="sl sl-hold">On hold</span></div>
+          <div class="app-meta"><span>MechWarrior Online</span><span>&middot;</span><span>1d ago</span></div>
+        </div>
+        <div class="app-item">
+          <div class="app-item-top"><span class="app-name">NovaStar</span><span class="sl sl-pending">Pending</span></div>
+          <div class="app-meta"><span>Vanguard</span><span>&middot;</span><span>2d ago</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="detail">
+      <div class="detail-header">
+        <div class="applicant-info">
+          <h2>PatrickH</h2>
+          <div class="applicant-meta">
+            <div class="meta-tag"><i class="ti ti-message-circle" style="font-size:14px"></i>PatrickH#0</div>
+            <div class="meta-tag"><i class="ti ti-user" style="font-size:14px"></i>forum: PatrickH</div>
+            <div class="meta-tag"><i class="ti ti-device-gamepad-2" style="font-size:14px"></i>Star Citizen</div>
+            <span class="sl sl-s2" style="display:inline-flex;align-items:center;gap:4px"><i class="ti ti-lock" style="font-size:12px"></i>OPSEC — S-2 review</span>
+          </div>
+        </div>
+        <div class="action-bar">
+          <button class="btn-approve"><i class="ti ti-check" style="font-size:14px"></i>Approve</button>
+          <button class="btn-hold"><i class="ti ti-pause" style="font-size:14px"></i>Hold</button>
+          <button class="btn-reject"><i class="ti ti-x" style="font-size:14px"></i>Reject</button>
+        </div>
+      </div>
+      <div class="detail-body">
+        <div class="detail-main">
+          <div>
+            <span class="section-label">Application</span>
+            <div class="qa-list">
+              <div class="qa-item">
+                <span class="qa-q">How did you hear about BWC?</span>
+                <span class="qa-a">From a friend in the Star Citizen community who recommended the org.</span>
+              </div>
+              <div class="qa-item">
+                <span class="qa-q">What do you hope to contribute to the organisation?</span>
+                <span class="qa-a">I have experience in logistics and trading and would like to support fleet operations.</span>
+              </div>
+              <div class="qa-item">
+                <span class="qa-q">Have you read and understood the BWC rules?</span>
+                <span class="qa-a">Yes</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="section-label">Comments</span>
+            <div class="comment-thread">
+              <div class="comment">
+                <div class="comment-author"><i class="ti ti-user" style="font-size:12px"></i>PatrickH &middot; 2h ago</div>
+                <div class="comment-body">Looking forward to hearing back. Happy to provide any additional information needed.</div>
+              </div>
+              <div class="comment internal">
+                <div class="comment-author"><i class="ti ti-lock" style="font-size:12px"></i>Recruiter Hansen &middot; 1h ago &middot; internal</div>
+                <div class="comment-body">Referred to S-2 for OPSEC check. Awaiting clearance before proceeding.</div>
+              </div>
+              <div class="comment-input-area">
+                <textarea placeholder="Leave a comment..."></textarea>
+                <div class="comment-actions">
+                  <label class="internal-toggle"><input type="checkbox"> Internal note only</label>
+                  <button class="btn-send">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-sidebar">
+          <div class="sidebar-card">
+            <span class="sidebar-card-label">Internal state</span>
+            <div class="state-option"><div class="state-dot" style="background:#EF9F27"></div>Pending</div>
+            <div class="state-option current"><div class="state-dot" style="background:#7F77DD"></div>S-2 review</div>
+            <div class="state-option"><div class="state-dot" style="background:#378ADD"></div>Recruiter review</div>
+            <div class="state-option"><div class="state-dot" style="background:#E24B4A"></div>On hold</div>
+          </div>
+          <div class="sidebar-divider"></div>
+          <div class="sidebar-card">
+            <span class="sidebar-card-label">Applicant</span>
+            <div class="info-row"><span class="info-key">Submitted</span><span class="info-val">11 Jun 2026, 12:14</span></div>
+            <div class="info-row"><span class="info-key">Forum ID</span><span class="info-val">4821</span></div>
+            <div class="info-row"><span class="info-key">Discord ID</span><span class="info-val">123456789...</span></div>
+          </div>
+          <div class="sidebar-divider"></div>
+          <div class="sidebar-card">
+            <span class="sidebar-card-label">History</span>
+            <div class="history-item">
+              <div class="history-top"><span class="hi-game">Star Citizen</span><span class="hi-date">Mar 2025</span></div>
+              <span style="font-size:11px;color:#f09595">Rejected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

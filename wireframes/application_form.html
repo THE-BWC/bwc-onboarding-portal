@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BWC Portal — Application form wireframe</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-primary: #1e1e1c;
+  --bg-secondary: #2a2a27;
+  --bg-tertiary: #242422;
+  --bg-info: #0c2840;
+  --bg-warning: #2e1e06;
+  --bg-success: #102008;
+  --text-primary: #e8e6de;
+  --text-secondary: #a09e96;
+  --text-tertiary: #6a6862;
+  --text-info: #85b7eb;
+  --text-success: #97c459;
+  --text-warning: #ef9f27;
+  --border-tertiary: rgba(255,255,255,0.08);
+  --border-secondary: rgba(255,255,255,0.14);
+  --border-info: #185fa5;
+  --border-warning: #854f0b;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+body { font-family: var(--font); background: #141412; padding: 32px 16px; min-height: 100vh; }
+.screen { background: var(--bg-tertiary); border-radius: var(--radius-lg); border: 0.5px solid var(--border-tertiary); overflow: hidden; max-width: 860px; margin: 0 auto; }
+.nav { background: var(--bg-primary); border-bottom: 0.5px solid var(--border-tertiary); padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-size: 15px; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+.nav-brand i { font-size: 18px; color: var(--text-secondary); }
+.user-pill { display: flex; align-items: center; gap: 8px; background: var(--bg-secondary); border: 0.5px solid var(--border-tertiary); border-radius: 999px; padding: 4px 12px 4px 4px; }
+.avatar { width: 24px; height: 24px; border-radius: 50%; background: #5865F2; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; }
+.user-pill span { font-size: 13px; color: var(--text-secondary); }
+.layout { display: grid; grid-template-columns: 200px 1fr; min-height: 560px; }
+.sidebar { background: var(--bg-primary); border-right: 0.5px solid var(--border-tertiary); padding: 20px 0; }
+.sidebar-section { padding: 0 12px 16px; }
+.sidebar-label { font-size: 11px; font-weight: 500; color: var(--text-tertiary); padding: 0 8px 8px; text-transform: uppercase; letter-spacing: 0.05em; display: block; }
+.sidebar-item { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: var(--radius-md); font-size: 13px; color: var(--text-secondary); cursor: pointer; }
+.sidebar-item.active { background: var(--bg-secondary); color: var(--text-primary); font-weight: 500; }
+.sidebar-item i { font-size: 16px; }
+.sidebar-divider { height: 0.5px; background: var(--border-tertiary); margin: 8px 12px; }
+.progress-item { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 4px 8px; color: var(--text-tertiary); }
+.progress-item.done { color: #97c459; }
+.progress-item.current { color: var(--text-primary); font-weight: 500; }
+.main { padding: 28px 32px; display: flex; flex-direction: column; gap: 20px; }
+.form-header h2 { font-size: 18px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+.form-header p { font-size: 13px; color: var(--text-secondary); }
+.field label { font-size: 13px; font-weight: 500; color: var(--text-primary); display: block; margin-bottom: 6px; }
+.game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.game-card { border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-md); padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; background: var(--bg-primary); }
+.game-card.selected { border-color: var(--border-info); background: var(--bg-info); }
+.game-icon { width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.game-info strong { font-size: 13px; font-weight: 500; color: var(--text-primary); display: block; }
+.game-info span { font-size: 11px; color: var(--text-secondary); }
+.opsec-notice { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--bg-warning); border-radius: var(--radius-md); border: 0.5px solid var(--border-warning); }
+.opsec-notice span { font-size: 13px; color: var(--text-warning); }
+.radio-group { display: flex; flex-direction: column; gap: 8px; }
+.radio-opt { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 0.5px solid var(--border-tertiary); border-radius: var(--radius-md); cursor: pointer; background: var(--bg-primary); }
+.radio-opt.selected { border-color: var(--border-info); background: var(--bg-info); }
+.radio-dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--border-secondary); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; }
+.radio-dot.filled { border-color: #378ADD; background: #378ADD; }
+.radio-dot.filled::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+.radio-text strong { font-size: 13px; font-weight: 500; color: var(--text-primary); display: block; }
+.radio-text span { font-size: 12px; color: var(--text-secondary); }
+.form-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 16px; border-top: 0.5px solid var(--border-tertiary); }
+.btn-primary { background: var(--bg-primary); border: 0.5px solid var(--border-secondary); border-radius: var(--radius-md); padding: 8px 20px; font-size: 14px; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; gap: 6px; font-family: var(--font); }
+.btn-secondary { background: transparent; border: none; padding: 8px 16px; font-size: 14px; color: var(--text-secondary); cursor: pointer; font-family: var(--font); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="nav">
+    <div class="nav-brand"><i class="ti ti-shield"></i>Black Widow Company</div>
+    <div class="user-pill"><div class="avatar">PH</div><span>PatrickH</span></div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <span class="sidebar-label">Application</span>
+        <div class="sidebar-item active"><i class="ti ti-device-gamepad-2"></i>Game selection</div>
+        <div class="sidebar-item"><i class="ti ti-forms"></i>Application form</div>
+        <div class="sidebar-item"><i class="ti ti-circle-check"></i>Review &amp; submit</div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">
+        <span class="sidebar-label">Progress</span>
+        <div class="progress-item done"><i class="ti ti-check" style="font-size:14px"></i>Account linked</div>
+        <div class="progress-item current"><i class="ti ti-circle" style="font-size:14px;color:#378ADD"></i>Choose a game</div>
+        <div class="progress-item"><i class="ti ti-circle" style="font-size:14px"></i>Fill application</div>
+        <div class="progress-item"><i class="ti ti-circle" style="font-size:14px"></i>Submit</div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="form-header">
+        <h2>Choose your game</h2>
+        <p>Select the division you are applying to join.</p>
+      </div>
+      <div class="game-grid">
+        <div class="game-card selected">
+          <div class="game-icon">🪐</div>
+          <div class="game-info"><strong>Star Citizen</strong><span>Task Force Aries</span></div>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🏜</div>
+          <div class="game-info"><strong>Dune: Awakening</strong><span>Task Force Dune</span></div>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">⚙️</div>
+          <div class="game-info"><strong>MechWarrior Online</strong><span>Task Force Iron</span></div>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🎖</div>
+          <div class="game-info"><strong>Vanguard</strong><span>Task Force Vanguard</span></div>
+        </div>
+      </div>
+      <div class="opsec-notice">
+        <i class="ti ti-lock" style="font-size:16px;color:#ef9f27"></i>
+        <span>This division has OPSEC requirements. Additional review applies.</span>
+      </div>
+      <div class="field">
+        <label>Join reason</label>
+        <div class="radio-group">
+          <div class="radio-opt selected">
+            <div class="radio-dot filled"></div>
+            <div class="radio-text"><strong>Active member</strong><span>I want to participate and play with BWC</span></div>
+          </div>
+          <div class="radio-opt">
+            <div class="radio-dot"></div>
+            <div class="radio-text"><strong>Guest</strong><span>I want observer access only</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-secondary">Cancel</button>
+        <button class="btn-primary">Continue <i class="ti ti-arrow-right" style="font-size:14px"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
